@@ -1,0 +1,41 @@
+import tkinter as tk
+from tkinter import ttk
+
+# Create the main application window
+root = tk.Tk()
+root.title("Management Interface")
+
+# Define the table (Treeview widget)
+table = ttk.Treeview(root, columns=("account_name", "order_date", "order_number", "order_writer", 
+                                    "order_amount", "order_status", "client_name", 
+                                    "order_price", "online_button", "web_messages"), show="headings")
+
+# Define column headings and set column properties
+columns = [
+    ("account_name", "Account Name", 150),
+    ("order_date", "Order Date", 100),
+    ("order_number", "Order Number", 100),
+    ("order_writer", "Order Writer", 100),
+    ("order_amount", "Order Amount", 100),
+    ("order_status", "Order Status", 100),
+    ("client_name", "Client Name", 100),
+    ("order_price", "Order Price", 100),
+    ("online_button", "Online Button", 100),
+    ("web_messages", "Web Messages", 150)
+]
+
+for col, header, width in columns:
+    table.heading(col, text=header)
+    table.column(col, width=width, anchor=tk.CENTER)
+
+# Insert placeholder data into the table
+for i in range(10):  # 10 rows
+    table.insert("", "end", values=(f"Account {i+1}", f"2024-06-{i+1:02d}", f"ORD-{1000+i}", 
+                                    f"Writer {i+1}", f"{100+i}", "Pending", f"Client {i+1}", 
+                                    f"${10*i+50:.2f}", "Button", "Web not connected"))
+
+# Place the table on the main window
+table.pack(fill=tk.BOTH, expand=True)
+
+# Start the Tkinter event loop
+root.mainloop()
